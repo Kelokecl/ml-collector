@@ -1,16 +1,16 @@
 services:
   - type: cron
     name: ml-collector
-    runtime: deno
-    schedule: "*/15 * * * *"
+    schedule: "0 8 * * *"
     region: oregon
-    build:
-      command: ""
-    command: deno run -A src/collector.ts
+    runtime: docker
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: SUPABASE_URL
-        sync: false
+        sync: true
       - key: SUPABASE_SERVICE_ROLE_KEY
-        sync: false
+        sync: true
       - key: ML_SITE_ID
         value: MLC
+      - key: SEARCH_LIMIT
+        value: "50"
