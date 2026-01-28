@@ -1,0 +1,16 @@
+services:
+  - type: cron
+    name: ml-collector
+    runtime: deno
+    schedule: "*/15 * * * *"
+    region: oregon
+    build:
+      command: ""
+    command: deno run -A src/collector.ts
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: ML_SITE_ID
+        value: MLC
